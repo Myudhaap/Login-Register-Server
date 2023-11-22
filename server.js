@@ -21,12 +21,14 @@ app.get("/", (req, res) => {
 // api routes
 app.use("/api", router);
 
+const PORT = process.env.PORT || 4000;
+
 // Start server
 connect()
   .then(() => {
     try {
-      app.listen(process.env.PORT, () =>
-        console.log(`Server connected to http://localhost:${process.env.PORT}`)
+      app.listen(PORT, () =>
+        console.log(`Server connected to http://localhost:${PORT}`)
       );
     } catch (err) {
       console.log("Cannot connect to the server");
