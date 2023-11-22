@@ -11,11 +11,8 @@ dotenv.config();
 // middleware
 app.use(express.json({ limit: "50mb" }));
 app.use(morgan("tiny"));
-app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+app.use(cors({ credentials: true, origin: process.env.WEBSITE_URI }));
 app.disable("x-powered-by"); //less hacker know about stack
-
-const port = 8080;
-
 // Http get request
 app.get("/", (req, res) => {
   res.status(201).json("Home GET Request");
@@ -28,8 +25,8 @@ app.use("/api", router);
 connect()
   .then(() => {
     try {
-      app.listen(port, () =>
-        console.log(`Server connected to http://localhost:${port}`)
+      app.listen(process.env.PORT, () =>
+        console.log(`Server connected to http://localhost:${process.env.PORT}`)
       );
     } catch (err) {
       console.log("Cannot connect to the server");
